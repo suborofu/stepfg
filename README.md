@@ -3,7 +3,7 @@
 Authors: E. Valetov and M. Berz  
 Organization: Michigan State University  
 Creation date: 03-Feb-2017  
-Email: valetove@msu.edu
+Email: evv@msu.edu
 
 ## 0. Introduction
 
