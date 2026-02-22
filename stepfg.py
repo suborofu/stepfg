@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 helpstr = '''
 This program converts a list of polygons in the x-y plane specified by
 vertices into a STEP file containing a 3D part obtained by extrusion of the

@@ -1,8 +1,10 @@
+# stepfg: STEP File Generator
 
-# stepfg: STEP File Generator                
-Authors: E. Valetov and M. Berz  
-Organization: Michigan State University  
-Creation date: 03-Feb-2017  
+**Python 3.6+** | [MIT License](LICENSE.md)
+
+Authors: E. Valetov and M. Berz
+Organization: Michigan State University
+Creation date: 03-Feb-2017
 Email: evv@msu.edu
 
 ## 0. Introduction
@@ -15,19 +17,57 @@ interior regions of these polygons along the z-axis.
 
 ## 1. Repository contents
 
-[README.md](README.md) This file  
-[LICENSE.md](LICENSE.md) Copyright notice  
-[stepfg.py](stepfg.py) Python source code  
+[README.md](README.md) This file
+[LICENSE.md](LICENSE.md) MIT License
+[stepfg.py](stepfg.py) Python source code
 [part_geometry.txt](part_geometry.txt) Sample input file (Muon g-2 Collaboration quadrupole)
 
-## 2. Command-line arguments
+## 2. Installation
 
-    stepfg [filename_in [filename_out]] [-h] [/h]  
-filename_in:    Input file containing 2D geometry data (default: "part_geometry.txt")  
-filename_out:   Output STEP file with resulting 3D part (default: "part_out.stp")  
--h or /h:       Help information  
+Clone the repository — no external dependencies are required:
 
-## 3. Input file format
+```
+git clone https://github.com/evvaletov/stepfg.git
+cd stepfg
+```
+
+## 3. Command-line arguments
+
+    stepfg [filename_in [filename_out]] [-h] [/h]
+filename_in:    Input file containing 2D geometry data (default: "part_geometry.txt")
+filename_out:   Output STEP file with resulting 3D part (default: "part_out.stp")
+-h or /h:       Help information
+
+## 4. Usage example
+
+Run stepfg with the included sample geometry (a Muon g-2 quadrupole):
+
+```
+python3 stepfg.py part_geometry.txt quadrupole.stp
+```
+
+Expected output:
+
+```
+----------------------------------------------------
+                STEP File Generator
+              E. Valetov and M. Berz
+             Michigan State University
+                Created 03-Feb-2017
+              Email: valetove@msu.edu
+----------------------------------------------------
+Use command-line option -h or /h for help.
+
+Reading 2D geometry file part_geometry.txt... [DONE]
+Initializing STEP file data... [DONE]
+Generating assembly... [DONE]
+Writing STEP file... [DONE]
+```
+
+The resulting `quadrupole.stp` can be opened in any CAD viewer that supports
+STEP files (FreeCAD, SOLIDWORKS, Autodesk Fusion, etc.).
+
+## 5. Input file format
 
 The input file format is three parameters as follows:
 
@@ -38,9 +78,9 @@ The input file format is three parameters as follows:
 First_argument: List of polygon specifications [pol1,pol2,...,poln]. Each
     polygon specification is a sequential list [vert1,vert2,...,vertm] of the
     polygon's vertices in the x-y plane. Each vertex is specified as a list
-    [x,y] or [x,y,0].  
+    [x,y] or [x,y,0].
 Second_argument: z-coordinate interval [z1, z2] that the resulting 3D part
-    should span.  
+    should span.
 Third_argument: Geometric proportionality coefficient. The output unit of
     length in the STEP file is mm, so use 10 if the 2D geometry is specified
     in cm.
@@ -48,5 +88,6 @@ Third_argument: Geometric proportionality coefficient. The output unit of
 A sample input file, "part_geometry.txt" containing a representation of the
 Muon g-2 Collaboration quadrupole, is supplied with this program.
 
-## 5. Copyright Notice
+## 6. Copyright Notice
+
 © 2017 Eremey Valetov and Martin Berz
