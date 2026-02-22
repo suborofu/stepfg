@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "stepfg"
-version = "2.0.0"
+version = "2.1.0"
 description = "Convert 2D polygon cross-sections into 3D STEP files via extrusion"
 authors = [
     { name = "Eremey Valetov", email = "evv@msu.edu" },

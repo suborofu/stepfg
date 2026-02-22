@@ -2,6 +2,7 @@
 
 import argparse
 import ast
+import json
 import sys
 from pathlib import Path
 
@@ -39,14 +40,29 @@ def main(argv=None):
         sys.exit(1)
 
     print(f"Reading 2D geometry file {args.input}... ", end="")
-    data = ast.literal_eval(input_path.read_text())
-    if not isinstance(data, list) or len(data) != 3:
+    raw = input_path.read_text()
+    try:
+        data = json.loads(raw)
+    except json.JSONDecodeError:
+        data = ast.literal_eval(raw)
+
+    if isinstance(data, dict):
+        try:
+            polygons = data['polygons']
+            z_range = data['z_range']
+            scale = data.get('scale', 1)
+        except KeyError as e:
+            print("[FAILED]")
+            print(f"Error: JSON input missing required key {e}.", file=sys.stderr)
+            sys.exit(1)
+    elif isinstance(data, list) and len(data) == 3:
+        polygons, z_range, scale = data
+    else:
         print("[FAILED]")
-        print("Error: input must be a list of [polygons, z_range, scale].", file=sys.stderr)
+        print("Error: input must be [polygons, z_range, scale] or a JSON object "
+              "with 'polygons' and 'z_range' keys.", file=sys.stderr)
         sys.exit(1)
     print("[DONE]")
-
-    polygons, z_range, scale = data
 
     print("Generating assembly... ", end="")
     try:

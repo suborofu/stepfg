@@ -63,18 +63,34 @@ stepfg part_geometry.txt quadrupole.stp
 
 ## Input file format
 
-The input file is a Python literal containing three elements:
+Both Python literal and JSON formats are supported.
+
+### Python literal (original format)
 
 ```python
 [polygons, z_range, scale]
 ```
 
+See `part_geometry.txt` for a full example (Muon g-2 quadrupole).
+
+### JSON (object or array)
+
+```json
+{
+  "polygons": [[[0, 0], [4, 0], [4, 4], [0, 4]]],
+  "z_range": [0, 10],
+  "scale": 1
+}
+```
+
+The `scale` key is optional (defaults to 1). A JSON array `[polygons, z_range, scale]`
+is also accepted. See `part_geometry.json` for a full example.
+
+### Fields
+
 - **polygons**: `[[vertex, ...], ...]` — each vertex is `[x, y]` or `[x, y, 0]`
 - **z_range**: `[z1, z2]` — extrusion interval
 - **scale**: proportionality coefficient (output is in mm; use 10 for cm input)
-
-A sample input file `part_geometry.txt` containing a Muon g-2 Collaboration
-quadrupole cross-section is included.
 
 ## Copyright Notice
 
