@@ -1,17 +1,38 @@
 [build-system]
 requires = ["setuptools>=61.0"]
-build-backend = "setuptools.backends._legacy:_Backend"
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "stepfg"
-version = "1.0.1"
-description = "Converts 2D polygon geometry into 3D STEP files via extrusion"
+version = "2.0.0"
+description = "Convert 2D polygon cross-sections into 3D STEP files via extrusion"
 authors = [
     { name = "Eremey Valetov", email = "evv@msu.edu" },
+    { name = "Martin Berz" },
 ]
 license = "MIT"
-requires-python = ">=3.6"
+requires-python = ">=3.8"
 readme = "README.md"
+keywords = ["STEP", "CAD", "polygon", "extrusion", "3D", "ISO-10303"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering",
+]
+
+[project.scripts]
+stepfg = "stepfg.__main__:main"
 
 [project.urls]
 Repository = "https://github.com/evvaletov/stepfg"
+
+[tool.setuptools.packages.find]
+include = ["stepfg*"]
